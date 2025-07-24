@@ -37,13 +37,15 @@ const CreateScreen = () => {
 
   const handleCreate = async () => {
     // validations
-    if (!title.trim()) return Alert.alert("Error", "Please enter a transaction title");
+    if (!title.trim())
+      return Alert.alert("Error", "Please enter a transaction title");
     if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
       Alert.alert("Error", "Please enter a valid amount");
       return;
     }
 
-    if (!selectedCategory) return Alert.alert("Error", "Please select a category");
+    if (!selectedCategory)
+      return Alert.alert("Error", "Please select a category");
 
     setIsLoading(true);
     try {
@@ -85,17 +87,27 @@ const CreateScreen = () => {
     <View style={styles.container}>
       {/* HEADER */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
           <Ionicons name="arrow-back" size={24} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>New Transaction</Text>
         <TouchableOpacity
-          style={[styles.saveButtonContainer, isLoading && styles.saveButtonDisabled]}
+          style={[
+            styles.saveButtonContainer,
+            isLoading && styles.saveButtonDisabled,
+          ]}
           onPress={handleCreate}
           disabled={isLoading}
         >
-          <Text style={styles.saveButton}>{isLoading ? "Saving..." : "Save"}</Text>
-          {!isLoading && <Ionicons name="checkmark" size={18} color={COLORS.primary} />}
+          <Text style={styles.saveButton}>
+            {isLoading ? "Saving..." : "Save"}
+          </Text>
+          {!isLoading && (
+            <Ionicons name="checkmark" size={18} color={COLORS.primary} />
+          )}
         </TouchableOpacity>
       </View>
 
@@ -112,7 +124,12 @@ const CreateScreen = () => {
               color={isExpense ? COLORS.white : COLORS.expense}
               style={styles.typeIcon}
             />
-            <Text style={[styles.typeButtonText, isExpense && styles.typeButtonTextActive]}>
+            <Text
+              style={[
+                styles.typeButtonText,
+                isExpense && styles.typeButtonTextActive,
+              ]}
+            >
               Expense
             </Text>
           </TouchableOpacity>
@@ -128,7 +145,12 @@ const CreateScreen = () => {
               color={!isExpense ? COLORS.white : COLORS.income}
               style={styles.typeIcon}
             />
-            <Text style={[styles.typeButtonText, !isExpense && styles.typeButtonTextActive]}>
+            <Text
+              style={[
+                styles.typeButtonText,
+                !isExpense && styles.typeButtonTextActive,
+              ]}
+            >
               Income
             </Text>
           </TouchableOpacity>
@@ -136,7 +158,7 @@ const CreateScreen = () => {
 
         {/* AMOUNT CONTAINER */}
         <View style={styles.amountContainer}>
-          <Text style={styles.currencySymbol}>$</Text>
+          <Text style={styles.currencySymbol}>₹</Text>
           <TextInput
             style={styles.amountInput}
             placeholder="0.00"
@@ -166,7 +188,8 @@ const CreateScreen = () => {
 
         {/* TITLE */}
         <Text style={styles.sectionTitle}>
-          <Ionicons name="pricetag-outline" size={16} color={COLORS.text} /> Category
+          <Ionicons name="pricetag-outline" size={16} color={COLORS.text} />{" "}
+          Category
         </Text>
 
         <View style={styles.categoryGrid}>
@@ -175,20 +198,26 @@ const CreateScreen = () => {
               key={category.id}
               style={[
                 styles.categoryButton,
-                selectedCategory === category.name && styles.categoryButtonActive,
+                selectedCategory === category.name &&
+                  styles.categoryButtonActive,
               ]}
               onPress={() => setSelectedCategory(category.name)}
             >
               <Ionicons
                 name={category.icon}
                 size={20}
-                color={selectedCategory === category.name ? COLORS.white : COLORS.text}
+                color={
+                  selectedCategory === category.name
+                    ? COLORS.white
+                    : COLORS.text
+                }
                 style={styles.categoryIcon}
               />
               <Text
                 style={[
                   styles.categoryButtonText,
-                  selectedCategory === category.name && styles.categoryButtonTextActive,
+                  selectedCategory === category.name &&
+                    styles.categoryButtonTextActive,
                 ]}
               >
                 {category.name}
